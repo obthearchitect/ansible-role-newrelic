@@ -1,0 +1,26 @@
+---
+  - name: 1. Configure the New Relic apt repository
+    apt_repository: repo='deb http://apt.newrelic.com/debian/ newrelic non-free' state=present
+
+  - name: 2. Add and trust the New Relic GPG key    
+    apt_key: url=https://download.newrelic.com/548C16BF.gpg state=present
+
+
+  - name: 3. Update the local package list
+    apt: update_cache=yes
+
+  - name: 4. Install New Relic Servers for Linux
+    apt:  name=newrelic-sysmond state=present
+
+  - name: Configure New Relic Sysmond
+    template:
+      src: nrsysmond.cfg.j2
+      dest: /etc/newrelic/nrsysmond.cfg
+      group: newrelic
+      owner: root
+      mode: 0640
+    notify:
+      - restart New Relic
+
+  - name: 6. Start the New Relic service on boot
+    service: name=newrelic-sysmond enabled=true

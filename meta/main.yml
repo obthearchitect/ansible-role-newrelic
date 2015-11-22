@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  author: Ovidio Borrero
+  description: This role installs the New Relic Linux Server agent
+  license: license (MIT)
+  min_ansible_version: 1.2
+platforms:
+  - name: Ubuntu
+    versions:
+    - trusty
+categories:
+  - cloud
+  - cloud:ec2
+  - system
+  - web
