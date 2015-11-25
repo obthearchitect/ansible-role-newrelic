@@ -11,7 +11,7 @@
   - name: 4. Install New Relic Servers for Linux
     apt:  name=newrelic-sysmond state=present
 
-  - name: 4. Add customized nrssysmond.cfg file with variables from defaults
+  - name: 5. Add customized nrssysmond.cfg file with variables from defaults
     template:
       src: nrsysmond.cfg.j2
       dest: /etc/newrelic/nrsysmond.cfg
@@ -21,5 +21,5 @@
     notify:
       - restart New Relic
 
-  - name: 5. Start the New Relic service on boot
+  - name: 6. Start the New Relic service on boot
     service: name=newrelic-sysmond enabled=true
