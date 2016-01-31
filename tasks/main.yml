@@ -9,7 +9,10 @@
     apt: update_cache=yes
 
   - name: 4. Install New Relic Servers for Linux
-    apt:  name=newrelic-sysmond state=present
+    apt: pkg={{item}} state=installed
+    with_items:
+       - newrelic-sysmond
+       - newrelic-php5
 
   - name: 5. Add customized nrssysmond.cfg file with variables from defaults
     template:
